@@ -1,41 +1,38 @@
 class HorVerLine {
   /**
-   * @param {number} v1
-   * @param {number} v2
-   */
-  static sort2Values = (v1, v2) => {
-    if (v1 > v2) {
-      return [v2, v1];
-    }
-
-    return [v1, v2];
-  };
-
-  /**
    * @param {number} x1
    * @param {number} y1
    * @param {number} x2
    * @param {number} y2
    */
   constructor(x1, y1, x2, y2) {
-    this.isHorizontal = y1 === y2;
-    if (this.isHorizontal) {
-      this.y1 = this.y2 = y1;
-      [this.x1, this.x2] = HorVerLine.sort2Values(x1, x2);
-    } else {
-      this.x1 = this.x2 = x1;
-      [this.y1, this.y2] = HorVerLine.sort2Values(y1, y2);
-    }
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
   }
 
+  /**
+   * generates all points on the line segment
+   */
   *pointGenerator() {
-    if (this.isHorizontal) {
-      for (let i = this.x1; i <= this.x2; i++) {
-        yield [i, this.y1];
+    if (this.y1 === this.y2) {
+      // horizontal line
+
+      const len = Math.abs(this.x1 - this.x2);
+      const stepper = this.x1 > this.x2 ? -1 : 1;
+
+      for (let i = 0; i <= len; i++) {
+        yield [this.x1 + i * stepper, this.y1];
       }
     } else {
-      for (let i = this.y1; i <= this.y2; i++) {
-        yield [this.x1, i];
+      // vertical line
+
+      const len = Math.abs(this.y1 - this.y2);
+      const stepper = this.y1 > this.y2 ? -1 : 1;
+
+      for (let i = 0; i <= len; i++) {
+        yield [this.x1, this.y1 + i * stepper];
       }
     }
   }
@@ -69,9 +66,11 @@ const main = (input) => {
         if (doubleVisitPoints.has(pointStr)) {
           continue;
         }
+
         count += 1;
         doubleVisitPoints.add(pointStr);
       }
+
       visitedPoints.add(pointStr);
     }
   }

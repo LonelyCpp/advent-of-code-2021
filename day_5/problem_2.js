@@ -12,6 +12,9 @@ class Line {
     this.y2 = y2;
   }
 
+  /**
+   * generates all points on the line segment
+   */
   *pointGenerator() {
     let xStepper = 0;
     if (this.x1 > this.x2) {
