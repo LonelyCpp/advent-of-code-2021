@@ -9,7 +9,7 @@ describe("day 7 problem 1", () => {
   });
 
   test("real input", () => {
-    const input = fs.readFileSync("./day_6/input.txt").toString();
+    const input = fs.readFileSync("./day_7/input.txt").toString();
     expect(solution(input)).toBe(347011);
   });
 });
