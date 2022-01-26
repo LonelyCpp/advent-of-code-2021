@@ -1,7 +1,7 @@
 const solution = require("./problem_2");
 const fs = require("fs");
 
-describe("day 7 problem 1", () => {
+describe("day 7 problem 2", () => {
   test("sample input", () => {
     const input = "16,1,2,0,4,2,7,1,2,14";
 
